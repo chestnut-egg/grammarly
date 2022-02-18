@@ -3,7 +3,7 @@ import werkzeug
 import os
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'upload/'
+app.config['UPLOAD_FOLDER'] = 'book/'
 
 @app.route('/index')
 def index():
@@ -15,7 +15,8 @@ def index():
 def uploader():
    if request.method == 'POST':
       f = request.files['file']
-      f.save(os.path.join(app.config['UPLOAD_FOLDER'],f.filename))
+      filename = f.filename
+      f.save(os.path.join(app.config['UPLOAD_FOLDER'],str(filename)))
       return 'file uploaded successfully'
 
 if __name__ == '__main__':
