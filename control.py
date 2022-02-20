@@ -11,12 +11,31 @@ def login():
     info = {}
     if request.method == 'POST':
         print("login")
+        print("获取账号")
         account = request.form.get("account")
-        password = request.form.get("password")
         print(account)
+        print("获取密码")
+        password = request.form.get("password")
         print(password)
         info['account'] = account
-        return render_template('login.html', info=info)
+
+        userinfo = db.select_user_by_account(account)
+        if len(userinfo) == 0:
+            info['wrong'] = "账号不存在"
+            print("账号不存在")
+            return render_template('login.html', info=info)
+        else:
+            realwd = userinfo[0]['password']
+            print("真实密码")
+            print(realwd)
+            if password == realwd:
+                print("登录成功")
+                return render_template('index.html', info=info)
+            else:
+                info['wrong'] = "密码错误"
+                print("密码错误")
+                return render_template('login.html', info=info)
+
     return render_template('login.html', info = info)
 
 @app.route('/register',methods=['GET','POST'])
@@ -24,9 +43,11 @@ def register():
     info = {}
     if request.method == 'POST':
         print("register")
+        print("获取账号")
         account = request.form.get("account")
-        password = request.form.get("password")
         print(account)
+        print("获取密码")
+        password = request.form.get("password")
         print(password)
         info['account'] = account
         return render_template('login.html', info=info)

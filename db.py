@@ -18,6 +18,21 @@ def select_wordinfo_by_word(word):
     conn.close()
     return data
 
+def select_user_by_account(account):
+    # 获取数据库连接
+    conn = pymysql.connect(host='127.0.0.1', user='root', password="123456", database='word', port=3306, charset='utf8')
+    # 准备一个sql语句
+    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    sql = "select * from user where account='" + account + "'"
+    # 执行sql语句
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    print(data)
+    # 关闭连接 释放资源
+    cursor.close()
+    conn.close()
+    return data
+
 
 def select(sql):
     # 获取数据库连接

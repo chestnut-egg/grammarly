@@ -20,7 +20,7 @@
 
    <div class="row" >
 
-      <div class="col-md-8">
+      <div class="col-md-6">
 
           <div id="demo" class="carousel slide" data-ride="carousel">
   <!-- 指示符 -->
@@ -54,6 +54,10 @@
 
       </div>
 
+
+       <div class="col-md-2">
+       </div>
+
    <div class="col-md-4">
     <form name="form1"  method="POST">
 
@@ -73,6 +77,29 @@
 
 
    </div>
+
+
+{% if info['wrong'] == "账号不存在" %}
+<div class="alert alert-danger">
+  <strong>账号不存在</strong>
+</div>
+   <script>
+    alert("账号不存在");
+</script>
+{% endif %}
+
+{% if info['wrong'] == "密码错误" %}
+<div class="alert alert-danger">
+  <strong>密码错误</strong>
+</div>
+   <script>
+    alert("密码错误");
+</script>
+{% endif %}
+
+
+
+
 
 </body>
 </html>
