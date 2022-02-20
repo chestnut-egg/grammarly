@@ -1,4 +1,6 @@
 from flask import *
+
+import db
 import werkzeug
 import os
 
@@ -21,9 +23,15 @@ def uploader():
 
 @app.route('/bookinfo')
 def bookinfo():
-    word = request.args.get('word')
     bookinfo={}
-    bookinfo['word'] = word
+    word = request.args.get('word')
+    if word is not None:
+        info = db.select_wordinfo_by_word(word)
+        if len(info) != 0:
+            bookinfo['word'] = info[0]['word']
+            bookinfo['interpretation'] = info[0]['interpretation']
+            bookinfo['imgurl'] = info[0]['imgurl']
+            bookinfo['other'] = info[0]['other']
     return render_template('bookinfo.html', info = bookinfo)
 
 if __name__ == '__main__':
