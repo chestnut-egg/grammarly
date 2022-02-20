@@ -19,6 +19,13 @@ def uploader():
       f.save(os.path.join(app.config['UPLOAD_FOLDER'],str(filename)))
       return 'file uploaded successfully'
 
+@app.route('/bookinfo')
+def bookinfo():
+    word = request.args.get('word')
+    bookinfo={}
+    bookinfo['word'] = word
+    return render_template('bookinfo.html', info = bookinfo)
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0')

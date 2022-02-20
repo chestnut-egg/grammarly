@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bookinfo</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="row" >
+    <div class="col-md-6">
+        <textarea class="form-control" rows="100">
+            12 312 3123
+            <a href="#" title="提示">haha</a>
+        </textarea>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-title">tomorrow</h5>
+            <div class="card-body">
+            <p class="card-text"> this is 1233123 {{ info['word'] }}</p>
+            <p class="card-text"><small class="text-muted">last update 3 days ago</small></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+<script>
+
+function get_selection() {
+    var txt = '';
+    if (window.getSelection) {
+        txt = window.getSelection();
+    } else if (document.getSelection) {
+        txt = document.getSelection();
+    } else if (document.selection) {
+        txt = document.selection.createRange().text;
+    }
+    return txt;
+}
+
+$(document).dblclick(function(e) {
+    var t = get_selection();
+    window.location.href="bookinfo?word="+t;
+});
+
+</script>
+
