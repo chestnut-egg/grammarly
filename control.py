@@ -1,17 +1,48 @@
 from flask import *
 
 import db
-import werkzeug
 import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'book/'
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    info = {}
+    if request.method == 'POST':
+        print("login")
+        account = request.form.get("account")
+        password = request.form.get("password")
+        print(account)
+        print(password)
+        info['account'] = account
+        return render_template('login.html', info=info)
+    return render_template('login.html', info = info)
+
+@app.route('/register',methods=['GET','POST'])
+def register():
+    info = {}
+    if request.method == 'POST':
+        print("register")
+        account = request.form.get("account")
+        password = request.form.get("password")
+        print(account)
+        print(password)
+        info['account'] = account
+        return render_template('login.html', info=info)
+    return render_template('login.html', info = info)
 
 @app.route('/index')
 def index():
     info={}
     info['name'] = 'name'
     return render_template('index.html', info = info)
+
+@app.route('/test')
+def test():
+    info={}
+    info['name'] = 'name'
+    return render_template('test.html', info = info)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
